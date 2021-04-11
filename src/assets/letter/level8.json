@@ -1,0 +1,134 @@
+{
+    "level8":[
+        [
+            {
+              "char": "ก",
+              "color": "black",
+              "source":"consonant/กอ.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "า",
+              "color": "green",
+              "source":"vowel/อา.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "ล",
+              "color": "red",
+              "source":"consonant/ลอ.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "",
+              "color": "",
+              "source":"sound/กาล/กาล.mp3",
+              "swap":"0"
+            }
+          ],
+          [
+            {
+              "char": "ท",
+              "color": "black",
+              "source":"consonant/ทอ.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "ิ",
+              "color": "green",
+              "source":"vowel/อิ.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "ศ",
+              "color": "red",
+              "source":"consonant/สอ.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "",
+              "color": "",
+              "source":"sound/ทิศ/ทิศ.mp3",
+              "swap":"0"
+            }
+          ],
+          [
+            {
+              "char": "บ",
+              "color": "black",
+              "source":"consonant/บอ.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "อ",
+              "color": "green",
+              "source":"consonant/ออ.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "ล",
+              "color": "red",
+              "source":"consonant/ลอ.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "",
+              "color": "",
+              "source":"sound/บอล/บอล.mp3",
+              "swap":"0"
+            }
+          ],
+          [
+            {
+              "char": "ย",
+              "color": "black",
+              "source":"consonant/ยอ.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "ุ",
+              "color": "green",
+              "source":"vowel/อุ.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "ค",
+              "color": "red",
+              "source":"consonant/คอ.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "",
+              "color": "",
+              "source":"sound/ยุค/ยุค.mp3",
+              "swap":"0"
+            }
+          ],
+          [
+            {
+              "char": "ร",
+              "color": "black",
+              "source":"consonant/รอ.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "ู",
+              "color": "green",
+              "source":"vowel/อู.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "ป",
+              "color": "red",
+              "source":"consonant/ปอ.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "",
+              "color": "",
+              "source":"sound/รูป/รูป.mp3",
+              "swap":"0"
+            }
+          ]
+    ]
+}

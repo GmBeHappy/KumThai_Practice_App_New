@@ -21,7 +21,7 @@
     <!-- When in running State -->
     <div v-if="state === 'runState'"> 
         <div>
-            <timer @takeEnd="takeEnd" v-bind:start-app="startApp" />
+            <timer @takeEnd="takeEnd" @takeDifficult="takeDifficult"  v-bind:start-app="startApp" />
         </div>
         <!-- display Real text -->
         <div v-bind:style="styleObject">
@@ -51,7 +51,7 @@
         <div class="wrap">
             
                 <a href="#" class="underlined underlined--reverse">
-                  "{{studentName}}" got {{arrayPool.length}}
+                  "{{studentName}}" got {{this.score}}
                 </a>
             
         </div>  
@@ -62,7 +62,13 @@
 </template>
 
 <script>
-import json from "@/assets/letter/letter.json";
+import json from  "@/assets/letter/level4.json";
+import json2 from "@/assets/letter/level5.json";
+import json3 from "@/assets/letter/level6.json";
+import json4 from "@/assets/letter/level7.json";
+import json5 from "@/assets/letter/level8.json";
+import json6 from "@/assets/letter/level9.json";
+import json7 from "@/assets/letter/level10.json";
 import timer from "@/components/layout/timer.vue";
 import Recorder from "./recorder";
 import { convertTimeMMSS } from "./utils";
@@ -101,7 +107,7 @@ export default {
       state: "nameState",
       studentName: '',
       myTrack: new Audio(),
-      letter: json.letters,     //Import json file
+      letter: json.level4,     //Import json file
       i: 0,                     //This integer for what number of alphabet in word              
       j: 0,                     //This integer for what number of word
       previusJ:0,
@@ -127,6 +133,10 @@ export default {
       recorder: this._initRecorder(),
       recordList: [],
       saveId: 0,
+
+      score:0,
+      isLevelChange: false,
+      presentLevel: 1
     };
   },
 
@@ -135,6 +145,11 @@ export default {
         this.isEnd = value;
         this.state = "endState"
     },
+    takeDifficult(value){
+        this.difficult = value;
+        console.log(this.difficult)
+    },
+
     //To get random number from word pool
     random(min,max,arrayPool) {
     var i = Math.floor(Math.random()*(max-min))+min;
@@ -180,7 +195,7 @@ export default {
             if (!this.isStop) {
               setTimeout(()=>{
                 this.playSound();
-              },100)
+              },500)
             }
           }.bind(this)
         );
@@ -215,7 +230,7 @@ export default {
       for (let index = 0; index < invisString.length; index++) {    //makeing array of html text 
         
           let lastInvis1 =
-            "<strong  style='font-size:"+(this.percent(this.fontSize , 100.5 )) +"px; opacity:0% ; font-weight: 401 !important; color: " +
+            "<strong class='strongID'  style='font-size:"+(this.percent(this.fontSize , 100.5 )) +"px; opacity:0% ; font-weight: 401 !important; color: " +
             this.coloredString[index] +
             ";'>" +
             invisString[index] +
@@ -259,7 +274,7 @@ export default {
         if (this.coloredString[index] == "blue") {
             if(this.thisString[index-1] === 'ั' ||this.thisString[index-1] === 'ิ'||this.thisString[index-1] === 'ี'||this.thisString[index-1] === 'ึ'  || this.thisString[index-1] === 'ื'){
               let lastStrings =
-              "<sup style='font-size:"+(this.percent(this.fontSize , 85 )) +"px; color: " +
+              "<sup class='supID' style='font-size:"+(this.percent(this.fontSize , 85 )) +"px; color: " +
               this.coloredString[index] +
               ";  '>" +
               this.thisString[index] +
@@ -268,7 +283,7 @@ export default {
             }
             else{
               let lastStrings =
-              "<b style='font-size:"+(this.percent(this.fontSize , 96.25 )) +"px; color: " +
+              "<b class='bID' style='font-size:"+(this.percent(this.fontSize , 96.25 )) +"px; color: " +
               this.coloredString[index] +
               "; font-weight: 389 ;'>" +
               this.thisString[index] +
@@ -282,16 +297,30 @@ export default {
           ||  this.thisString[index] === 'ู')             //สระอุ
           {
             let lastStrings =
-              "<span style='font-size:"+(this.percent(this.fontSize , 75 )) +"px; color: " +
+              "<span class='spanID' style='font-size:"+(this.percent(this.fontSize , 75 )) +"px; color: " +
               this.coloredString[index] +
               ";'>" +
               this.thisString[index] +
               "</span>";
             lastString.push(lastStrings);
           }
+          else if(this.thisString[index+1] === "ุ" || this.thisString[index+1] === "ู"
+          || this.thisString[index+1] === "ิ" || this.thisString[index+1] === "ี"
+          || this.thisString[index+1] === "ึ" || this.thisString[index+1] === "ื"
+          || this.thisString[index+1] === "่" || this.thisString[index+1] === "้"
+          || this.thisString[index+1] === "๊" || this.thisString[index+1] === "๋"
+          ){
+            let lastStrings =
+              "<b style='font-size:"+(this.percent(this.fontSize , 100 )) +"px; color: " +
+              this.coloredString[index] +
+              ";'>" +
+              this.thisString[index] +
+              "</b>";
+            lastString.push(lastStrings);
+          }
           else{
             let lastStrings =
-              "<b style='letterSpacing:100px; font-size:"+(this.percent(this.fontSize , 100 )) +"px; color: " +
+              "<b class='bID' style='font-size:"+(this.percent(this.fontSize , 100 )) +"px; color: " +
               this.coloredString[index] +
               ";'>" +
               this.thisString[index] +
@@ -300,9 +329,14 @@ export default {
           }
         } 
         else {
-          if(this.coloredString[index-1] !== "blue"){
+          if(this.thisString[index+1] === "ุ" || this.thisString[index+1] === "ู"
+          || this.thisString[index+1] === "ิ" || this.thisString[index+1] === "ี"
+          || this.thisString[index+1] === "ึ" || this.thisString[index+1] === "ื"
+          || this.thisString[index+1] === "่" || this.thisString[index+1] === "้"
+          || this.thisString[index+1] === "๊" || this.thisString[index+1] === "๋"
+          ){
             let lastStrings =
-              "<strong  style='letterSpacing:100px; font-size:"+(this.percent(this.fontSize , 100.5 )) +"px; font-weight: 401 !important; color: " +
+              "<strong class='strongID2' style='font-size:"+(this.percent(this.fontSize , 100.5 )) +"px; font-weight: 401 !important; color: " +
               this.coloredString[index] +
               ";'>" +
               this.thisString[index] +
@@ -311,7 +345,7 @@ export default {
           }
           else{
             let lastStrings =
-              "<strong :class='strongID' style='font-size:"+(this.percent(this.fontSize , 100.5 )) +"px; font-weight: 401 !important; color: " +
+              "<strong class='strongID' style='font-size:"+(this.percent(this.fontSize , 100.5 )) +"px; font-weight: 401 !important; color: " +
               this.coloredString[index] +
               ";'>" +
               this.thisString[index] +
@@ -329,6 +363,33 @@ export default {
       return thisstring;
     },
     runningFunction(){
+      if(this.presentLevel != this.difficult){
+        console.log("Level change reset array pool")
+        this.arrayPool=[];
+        this.presentLevel = this.difficult;
+      }
+      if(this.difficult == 1){
+        this.letter = json.level4;
+      }
+      else if(this.difficult == 2){
+        this.letter = json2.level5;
+      }
+      else if(this.difficult == 3){
+        this.letter = json3.level6;
+      }
+      else if(this.difficult == 4){
+        this.letter = json4.level7;
+      }
+      else if(this.difficult == 5){
+        this.letter = json5.level8;
+      }
+      else if(this.difficult == 6){
+        this.letter = json6.level9;
+      }
+      else if(this.difficult == 7){
+        this.letter = json7.level10;
+      }
+
       if(this.state === 'endState'){
         var para = document.getElementById("endScore");
         para.innerHTML = "sads";
@@ -391,7 +452,7 @@ export default {
       console.log(this.recorder.recordList()[this.saveId].url);
       this.isComplete = true;
       this.saveId++;
-      this.clearState();
+      this.score++;
     },
     _initRecorder() {
       return new Recorder({
@@ -523,7 +584,24 @@ export default {
 }
 
 b{
+  
   font-weight: 399 !important;
 }
+strong.strongID{
+  letter-spacing: 40px;
+}
+strong.strongID2{
+  letter-spacing: 0px;
+}
+span.spanID{
+letter-spacing: 40px;
+}
+b.bID{
+letter-spacing: 40px;
+}
+sup.supID{
+  letter-spacing: 40px;
+}
+
 
 </style>

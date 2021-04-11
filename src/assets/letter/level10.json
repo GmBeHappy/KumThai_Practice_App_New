@@ -1,0 +1,164 @@
+{
+    "level10":[
+        [
+            {
+              "char": "ผ",
+              "color": "black",
+              "source":"consonant/ผอ.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "ก",
+              "color": "black",
+              "source":"consonant/กอ.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "า",
+              "color": "green",
+              "source":"vowel/อา.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "",
+              "color": "",
+              "source":"sound/ผกา/ผกา.mp3",
+              "swap":"0"
+            }
+          ],
+          [
+            {
+              "char": "พ",
+              "color": "black",
+              "source":"consonant/พอ.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "น",
+              "color": "black",
+              "source":"consonant/นอ.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "า",
+              "color": "green",
+              "source":"vowel/อา.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "",
+              "color": "",
+              "source":"sound/พนา/พนา.mp3",
+              "swap":"0"
+            }
+          ],
+          [
+            {
+              "char": "ห",
+              "color": "black",
+              "source":"consonant/หอ.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "น",
+              "color": "black",
+              "source":"consonant/นอ.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "า",
+              "color": "green",
+              "source":"vowel/อา.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "",
+              "color": "",
+              "source":"sound/หน้า/หนา.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "",
+              "color": "",
+              "source":"sound/หน้า/หนา.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "้",
+              "color": "blue",
+              "source":"sound/หน้า/โท.mp3",
+              "swap":"1"
+            },
+            {
+              "char": "",
+              "color": "",
+              "source":"sound/หน้า/หน้า.mp3",
+              "swap":"0"
+            }
+          ],
+          [
+            {
+              "char": "ห",
+              "color": "black",
+              "source":"consonant/หอ.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "ย",
+              "color": "black",
+              "source":"consonant/ยอ.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "ุ",
+              "color": "green",
+              "source":"vowel/อุ.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "ด",
+              "color": "red",
+              "source":"consonant/ดอ.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "",
+              "color": "",
+              "source":"sound/หยุด/หยุด.mp3",
+              "swap":"0"
+            }
+          ],
+          [
+            {
+              "char": "อ",
+              "color": "black",
+              "source":"consonant/ออ.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "ย",
+              "color": "black",
+              "source":"consonant/ยอ.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "า",
+              "color": "green",
+              "source":"vowel/อา.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "ก",
+              "color": "red",
+              "source":"consonant/กอ.mp3",
+              "swap":"0"
+            },
+            {
+              "char": "",
+              "color": "",
+              "source":"sound/อยาก/อยาก.mp3",
+              "swap":"0"
+            }
+          ]
+    ]
+}
