@@ -1,20 +1,16 @@
-# abc_project2
+# POT
 
 ## Project setup
 ```
-yarn install
+npm install
 ```
 
-### Compiles and hot-reloads for development
+### Compiles for development
 ```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
+npm run electron:serve
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-"# KumThai_Practice_App_New" 
+### Compiles for production and export exe file
+```
+npm run electron:build
+```
