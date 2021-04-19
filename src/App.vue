@@ -123,7 +123,7 @@ export default {
       //Text style 
       fontSize:400,             //text size
       styleObject: {
-        top: '50px',
+        top: '80px',
         color: 'blue',
         position: 'fixed',
         left: '10px', 
@@ -136,7 +136,8 @@ export default {
 
       score:0,
       isLevelChange: false,
-      presentLevel: 1
+      presentLevel: 1,
+      saveFolder:""
     };
   },
 
@@ -240,7 +241,7 @@ export default {
       }
       tempText.innerHTML = lastInvis.join("")
       this.currentString = invisString.join("")
-        this.styleObject.left = tempText.offsetLeft + "px"
+      this.styleObject.left = tempText.offsetLeft + "px"
         
 
     },
@@ -271,45 +272,160 @@ export default {
         }
       }
       for (let index = 0; index < this.thisString.length; index++) {
+
+        //ถ้าตัวนั้นเป็นวรรณยุกต์
         if (this.coloredString[index] == "blue") {
-            if(this.thisString[index-1] === 'ั' ||this.thisString[index-1] === 'ิ'||this.thisString[index-1] === 'ี'||this.thisString[index-1] === 'ึ'  || this.thisString[index-1] === 'ื'){
-              let lastStrings =
-              "<sup class='supID' style='font-size:"+(this.percent(this.fontSize , 85 )) +"px; color: " +
-              this.coloredString[index] +
-              ";  '>" +
-              this.thisString[index] +
-              "</sup>";
-              lastString.push(lastStrings);
+            if( this.thisString[index-1] === 'ั' ||
+                this.thisString[index-1] === 'ิ' ||
+                this.thisString[index-1] === 'ี' ||
+                this.thisString[index-1] === 'ึ' || 
+                this.thisString[index-1] === 'ื' ){
+
+                if( this.thisString[index] === "๋" ||
+                    this.thisString[index] === "่" ||
+                    this.thisString[index] === "้" ||
+                    this.thisString[index] === "๊" ){  //ถ้าเกิดเป็นไม้จัตวา คงต้องให้ด้านหลังมันขยับมาด้านหน้านิสนึง
+                    if( this.thisString[index-2] === 'ป' || //แล้วถ้าข้างหน้าแม่งเจือกเป็น ป ฟ ฝ ฬ
+                        this.thisString[index-2] === 'ฟ' ||
+                        this.thisString[index-2] === 'ฝ' ||
+                        this.thisString[index-2] === 'ฬ' ){
+                      let lastStrings =
+                        "<sup class='supID2' style='font-size:"+(this.percent(this.fontSize , 85 )) +"px; color: " +
+                        this.coloredString[index] +
+                        ";  '>" +
+                        this.thisString[index] +
+                        "</sup>";
+                      lastString.push(lastStrings);
+                    }
+                    else{
+                      let lastStrings =
+                        "<sup class='supID' style='font-size:"+(this.percent(this.fontSize , 85 )) +"px; color: " +
+                        this.coloredString[index] +
+                        ";  '>" +
+                        this.thisString[index] +
+                        "</sup>";
+                      lastString.push(lastStrings);
+
+                    }
+                }
+                else{
+                  let lastStrings =
+                    "<sup class='supID' style='font-size:"+(this.percent(this.fontSize , 85 )) +"px; color: " +
+                    this.coloredString[index] +
+                    ";  '>" +
+                    this.thisString[index] +
+                    "</sup>";
+                  lastString.push(lastStrings);
+                }
+              
+            }
+            else if(  this.thisString[index-1] ==='ป' ||
+                      this.thisString[index-1] ==='ฝ' ||
+                      this.thisString[index-1] ==='ฬ' ||
+                      this.thisString[index-1] ==='ฟ'
+                ){
+                  if(this.thisString[index] === '๋'){
+                    let lastStrings =
+                    "<b class='bID3' style='font-size:"+(this.percent(this.fontSize , 96.25 )) +"px; color: " +
+                    this.coloredString[index] +
+                    "; font-weight: 389 ;'>" +
+                    this.thisString[index] +
+                    "</b>";
+                    lastString.push(lastStrings);
+                  }
+                  else{
+                    let lastStrings =
+                    "<b class='bID2' style='font-size:"+(this.percent(this.fontSize , 96.25 )) +"px; color: " +
+                    this.coloredString[index] +
+                    "; font-weight: 389 ;'>" +
+                    this.thisString[index] +
+                    "</b>";
+                    lastString.push(lastStrings);
+                  }
+            }
+            else if(this.thisString[index] ==='๋'){
+                console.log("hehehheheh")
+                let lastStrings =
+                "<b class='bID5' style='font-size:"+(this.percent(this.fontSize , 96.25 )) +"px; color: " +
+                this.coloredString[index] +
+                "; font-weight: 389 ;'>" +
+                this.thisString[index] +
+                "</b>";
+                lastString.push(lastStrings);
             }
             else{
-              let lastStrings =
-              "<b class='bID' style='font-size:"+(this.percent(this.fontSize , 96.25 )) +"px; color: " +
-              this.coloredString[index] +
-              "; font-weight: 389 ;'>" +
-              this.thisString[index] +
-              "</b>";
-              lastString.push(lastStrings);
+                let lastStrings =
+                "<b class='bID' style='font-size:"+(this.percent(this.fontSize , 96.25 )) +"px; color: " +
+                this.coloredString[index] +
+                "; font-weight: 389 ;'>" +
+                this.thisString[index] +
+                "</b>";
+                lastString.push(lastStrings);
             }
           
         } 
+
+
+        //เช็คสำหรับตัวอักษรนั้นๆเป็นสระ
         else if (this.coloredString[index] == "green") {
-          if( this.thisString[index] === 'ุ'             //สระอุ
-          ||  this.thisString[index] === 'ู')             //สระอุ
-          {
-            let lastStrings =
-              "<span class='spanID' style='font-size:"+(this.percent(this.fontSize , 75 )) +"px; color: " +
-              this.coloredString[index] +
-              ";'>" +
-              this.thisString[index] +
-              "</span>";
-            lastString.push(lastStrings);
+          if( this.thisString[index] === 'ุ' ||            //สระอุ
+              this.thisString[index] === 'ู'){             //สระอุ
+              let lastStrings =
+                "<span class='spanID' style='font-size:"+(this.percent(this.fontSize , 100 )) +"px; color: " +
+                this.coloredString[index] +
+                ";'>" +
+                this.thisString[index] +
+                "</span>";
+              lastString.push(lastStrings);
+          }
+          else if(  this.thisString[index-1] ==='ป' ||   //ไว้ดักตอนที่ข้างหน้าเป็น ป ฝ ฟ ฬ
+                    this.thisString[index-1] ==='ฝ' ||
+                    this.thisString[index-1] ==='ฬ' ||
+                    this.thisString[index-1] ==='ฟ'){
+              if(  this.thisString[index] === "ิ" || this.thisString[index] === "ี" ||
+                   this.thisString[index] === "ึ" || this.thisString[index] === "ื" ||
+                   this.thisString[index] === "ั" || this.thisString[index] === "่" || 
+                   this.thisString[index] === "้" || this.thisString[index] === "๊" || 
+                   this.thisString[index] === "๋"  ){
+                     if(  this.thisString[index+1] === "๋" ||
+                          this.thisString[index+1] === "่" ||
+                          this.thisString[index+1] === "้" ||
+                          this.thisString[index+1] === "๊" ){
+                        let lastStrings =
+                          "<b class='bID4' style='font-size:"+(this.percent(this.fontSize , 100 )) +"px; color: " +
+                          this.coloredString[index] +
+                          ";'>" +
+                          this.thisString[index] +
+                          "</b>";
+                        lastString.push(lastStrings);
+                     }
+                     else{
+                        let lastStrings =
+                          "<b class='bID2' style='font-size:"+(this.percent(this.fontSize , 100 )) +"px; color: " +
+                          this.coloredString[index] +
+                          ";'>" +
+                          this.thisString[index] +
+                          "</b>";
+                        lastString.push(lastStrings);
+                     }
+              }
+              else{
+                let lastStrings =
+                  "<b class='bID' style='font-size:"+(this.percent(this.fontSize , 100 )) +"px; color: " +
+                  this.coloredString[index] +
+                  ";'>" +
+                  this.thisString[index] +
+                  "</b>";
+                lastString.push(lastStrings);
+              }
+
           }
           else if(this.thisString[index+1] === "ุ" || this.thisString[index+1] === "ู"
           || this.thisString[index+1] === "ิ" || this.thisString[index+1] === "ี"
           || this.thisString[index+1] === "ึ" || this.thisString[index+1] === "ื"
           || this.thisString[index+1] === "่" || this.thisString[index+1] === "้"
-          || this.thisString[index+1] === "๊" || this.thisString[index+1] === "๋"
-          ){
+          || this.thisString[index+1] === "๊" || this.thisString[index+1] === "๋")
+          {
             let lastStrings =
               "<b style='font-size:"+(this.percent(this.fontSize , 100 )) +"px; color: " +
               this.coloredString[index] +
@@ -328,22 +444,77 @@ export default {
             lastString.push(lastStrings);
           }
         } 
+
+
+        //เช็คสำหรับตัวอักษรนั้นๆเป็นพยัญชนะ,ตัวสะกด
         else {
-          if(this.thisString[index+1] === "ุ" || this.thisString[index+1] === "ู"
-          || this.thisString[index+1] === "ิ" || this.thisString[index+1] === "ี"
-          || this.thisString[index+1] === "ึ" || this.thisString[index+1] === "ื"
-          || this.thisString[index+1] === "่" || this.thisString[index+1] === "้"
-          || this.thisString[index+1] === "๊" || this.thisString[index+1] === "๋"
+          //ถ้าเกิดตัวที่อยู่ข้างหน้าเป้นไม้จัตวาหละ
+          if( this.thisString[index+1] === "๋"
           ){
-            let lastStrings =
-              "<strong class='strongID2' style='font-size:"+(this.percent(this.fontSize , 100.5 )) +"px; font-weight: 401 !important; color: " +
-              this.coloredString[index] +
-              ";'>" +
-              this.thisString[index] +
-              "</strong>";
-            lastString.push(lastStrings);
+            if( this.thisString[index] ==='ป' ||
+                this.thisString[index] ==='ฝ' ||
+                this.thisString[index] ==='ฬ' ||
+                this.thisString[index] ==='ฟ'
+                ){
+                  let lastStrings =
+                    "<strong class='strongID4' style='font-size:"+(this.percent(this.fontSize , 100.5 )) +"px; font-weight: 401 !important; color: " +
+                    this.coloredString[index] +
+                    ";'>" +
+                    this.thisString[index] +
+                    "</strong>";
+                  lastString.push(lastStrings);
+
+                }
+                else{
+                  
+                  let lastStrings =
+                    "<strong class='strongID5' style='font-size:"+(this.percent(this.fontSize , 100.5 )) +"px; font-weight: 401 !important; color: " +
+                    this.coloredString[index] +
+                    ";'>" +
+                    this.thisString[index] +
+                    "</strong>";
+                  lastString.push(lastStrings);
+                }
           }
-          else{
+          else if( //ถ้าเกิดตัวด้านหน้าเป็นตัวที่อยู่ด้านบน หรืออยู่ด้านล่าง
+              this.thisString[index+1] === "้" ||
+              this.thisString[index+1] === "่" ||
+              this.thisString[index+1] === "๊" ||
+              this.thisString[index+1] === "ิ" ||
+              this.thisString[index+1] === "ี" ||
+              this.thisString[index+1] === "ึ" ||
+              this.thisString[index+1] === "ื" ||
+              this.thisString[index+1] === "ั" ||
+              this.thisString[index+1] === "็" ||
+              this.thisString[index+1] === "ุ" || 
+              this.thisString[index+1] === "ู"){
+                if( this.thisString[index] ==='ป' ||  //แล้วถ้าตัวนนั้นๆเสือกเป็นพยัญชนะยาวๆ ก็ให้ระยะห่างมันติดลบสะหน่อย
+                    this.thisString[index] ==='ฝ' ||
+                    this.thisString[index] ==='ฬ' ||
+                    this.thisString[index] ==='ฟ'
+                  ){
+                  let lastStrings =
+                    "<strong class='strongID3' style='font-size:"+(this.percent(this.fontSize , 100.5 )) +"px; font-weight: 401 !important; color: " +
+                    this.coloredString[index] +
+                    ";'>" +
+                    this.thisString[index] +
+                    "</strong>";
+                  lastString.push(lastStrings);
+
+                }
+                else{                                   //แต่ถ้าเป็นตัวอักษรปกติที่ไม่ใช่ ป ฟ ฝ ฬ ก็ให้มันระยะห่างเท่ากะเพื่อนคือ 0 px
+                  let lastStrings =
+                    "<strong class='strongID2' style='font-size:"+(this.percent(this.fontSize , 100.5 )) +"px; font-weight: 401 !important; color: " +
+                    this.coloredString[index] +
+                    ";'>" +
+                    this.thisString[index] +
+                    "</strong>";
+                  lastString.push(lastStrings);
+                }
+
+          }
+
+          else{ //ถ้าเกิดไอพวกตัวด้านหลังเป็นพยัญชนะโง่ๆ ก็ให้มันขยับไป 40 px 
             let lastStrings =
               "<strong class='strongID' style='font-size:"+(this.percent(this.fontSize , 100.5 )) +"px; font-weight: 401 !important; color: " +
               this.coloredString[index] +
@@ -357,6 +528,7 @@ export default {
       }
       para.innerHTML = lastString.join("");
     },
+
     //this function use to swap array of string
     swap(thisstring, character, num) {
       thisstring.splice(thisstring.length - num, 0, character);
@@ -431,6 +603,19 @@ export default {
         }
     },
     startState(){
+      var datetime = new Date();
+      let date = ("0" + datetime.getDate()).slice(-2);
+      // current month
+      let month = ("0" + (datetime.getMonth() + 1)).slice(-2);
+      // current year
+      let year = datetime.getFullYear();
+      // current hours
+      let hours = datetime.getHours();
+      // current minutes
+      let minutes = datetime.getMinutes();
+      // current seconds
+      let seconds = datetime.getSeconds();
+      this.saveFolder = `${this.studentName}-${year}-${month}-${date}-${hours}-${minutes}-${seconds}`;
       this.state = 'runState' ; 
       setTimeout(()=>{
             // this.turnRecord() ; 
@@ -448,7 +633,7 @@ export default {
       this.recordList = this.recorder.recordList();
       const blob = this.recorder.recordList()[this.saveId].blob
       // // save file to desktop.
-      window.saveBlob(blob, filename,this.studentName);
+      window.saveBlob(blob, filename,this.saveFolder);
       console.log(this.recorder.recordList()[this.saveId].url);
       this.isComplete = true;
       this.saveId++;
@@ -593,15 +778,42 @@ strong.strongID{
 strong.strongID2{
   letter-spacing: 0px;
 }
+strong.strongID3{
+  letter-spacing: -70px;
+}
+strong.strongID4{
+  letter-spacing: -90px;
+}
+strong.strongID5{
+  letter-spacing: -40px;
+}
 span.spanID{
 letter-spacing: 40px;
 }
 b.bID{
 letter-spacing: 40px;
 }
+b.bID2{
+letter-spacing: 110px;
+}
+b.bID3{
+letter-spacing: 130px;
+}
+/* for สระที่ข้าวหน้าเป็น ป ฟ ฝ ฬ */
+b.bID4{ 
+  letter-spacing: -90px;
+}
+b.bID5{ 
+  letter-spacing: 80px;
+}
+
 sup.supID{
   letter-spacing: 40px;
+}
+sup.supID2{
+  letter-spacing: 110px;
 }
 
 
 </style>
+
